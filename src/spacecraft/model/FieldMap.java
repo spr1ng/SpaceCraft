@@ -9,29 +9,44 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.util.ArrayList;
 
 /**
- * 
+ * @version $Id$
  * @author rsen
  */
 @XStreamAlias("map")
 public class FieldMap {
+    
+    /** Max OX value */
     @XStreamAsAttribute
-    private int width;
+    private int maxX;
 
+    /** Max OY value */
     @XStreamAsAttribute
-    private int height;
+    private int maxY;
+    
+    /** Reserved for the future purposes */
+    @XStreamAsAttribute @XStreamOmitField
+    private int maxZ;
 
+    /** Gravity influencies on the trajectory of a moving corpus */
     @XStreamAsAttribute
     private int gravity;
     
+    /** The number of cells visible to the corpus(ship??) in each of the directions */
     @XStreamAsAttribute
     private int visibility;
-    // TODO: weather
-//    @XStreamImplicit
+    
+    private Weather weather;
+    
     private ArrayList<Corpus> corpuses = new ArrayList<Corpus>();
+
+    public FieldMap() {
+        weather = new Weather(new Wind(), 25, 50);
+    }
 
     public ArrayList<Corpus> getCorpuses() {
         return corpuses;
@@ -49,12 +64,28 @@ public class FieldMap {
         this.gravity = gravity;
     }
 
-    public int getHeight() {
-        return height;
+    public int getMaxX() {
+        return maxX;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
+    public void setMaxX(int maxX) {
+        this.maxX = maxX;
+    }
+
+    public int getMaxY() {
+        return maxY;
+    }
+
+    public void setMaxY(int maxY) {
+        this.maxY = maxY;
+    }
+
+    public int getMaxZ() {
+        return maxZ;
+    }
+
+    public void setMaxZ(int maxZ) {
+        this.maxZ = maxZ;
     }
 
     public int getVisibility() {
@@ -65,12 +96,12 @@ public class FieldMap {
         this.visibility = visibility;
     }
 
-    public int getWidth() {
-        return width;
+    public Weather getWeather() {
+        return weather;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
     public static void main(String[] args) {
