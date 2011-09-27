@@ -3,15 +3,12 @@
  * and open the template in the editor.
  */
 
-package spacecraft.model;
+package spacecraft.model.field;
 
-import com.thoughtworks.xstream.XStream;
+import java.util.ArrayList;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.util.ArrayList;
 
 /**
  * @version $Id$
@@ -32,28 +29,28 @@ public class FieldMap {
     @XStreamAsAttribute @XStreamOmitField
     private int maxZ;
 
-    /** Gravity influencies on the trajectory of a moving corpus */
+    /** Gravity influences on the trajectory of a moving body */
     @XStreamAsAttribute
     private int gravity;
     
-    /** The number of cells visible to the corpus(ship??) in each of the directions */
+    /** The number of cells visible to the body(ship??) in each of the directions */
     @XStreamAsAttribute
     private int visibility;
     
     private Weather weather;
     
-    private ArrayList<Corpus> corpuses = new ArrayList<Corpus>();
+    private ArrayList<Body> bodies = new ArrayList<Body>();
 
     public FieldMap() {
         weather = new Weather(new Wind(), 25, 50);
     }
 
-    public ArrayList<Corpus> getCorpuses() {
-        return corpuses;
+    public ArrayList<Body> getBodies() {
+        return bodies;
     }
 
-    public void setCorpuses(ArrayList<Corpus> corpuses) {
-        this.corpuses = corpuses;
+    public void setBody(ArrayList<Body> bodies) {
+        this.bodies = bodies;
     }
 
     public int getGravity() {
@@ -102,18 +99,6 @@ public class FieldMap {
 
     public void setWeather(Weather weather) {
         this.weather = weather;
-    }
-
-    public static void main(String[] args) {
-        FieldMap map = new FieldMap();
-        map.setGravity(1);
-        Corpus corpus = new Corpus();
-        corpus.setId("Rock");
-        map.corpuses.add(corpus);
-
-        XStream xStream = new XStream(new DomDriver());
-        xStream.autodetectAnnotations(true);
-        System.out.println(xStream.toXML(map));
     }
 
 }

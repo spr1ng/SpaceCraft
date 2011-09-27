@@ -5,14 +5,14 @@
 package spacecraft.model.ai;
 
 import spacecraft.model.Action;
-import spacecraft.model.FieldMap;
+import spacecraft.model.field.FieldMap;
 
 /**
  * @version $Id$
  * @author rsen
  */
-public abstract class CorpusAI {
+public interface AI {
     
-    public abstract Action getAction(FieldMap fieldMap);
+    Action getAction(FieldMap fieldMap);
     
 }
